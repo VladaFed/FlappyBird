@@ -1,36 +1,21 @@
 package View;
 
-import java.util.ArrayList;
-import java.lang.Record;
+import javax.swing.*;
+import java.awt.*;
 
-public class RecordPanel {
+public class RecordPanel extends JFrame {
+    JFrame frameTable = new JFrame("Table of record");
 
-    /*private final List<Note> table = new ArrayList<>();
+    public RecordPanel() {}
 
-    //private RecordPanel() {}
+    public void tableGame(String[][] data, String[] columnNames) {
+        JTable table = new JTable(data, columnNames);
+        JScrollPane scrollPane = new JScrollPane(table);
 
-    public ArrayList<Note> getTable() {
-        return (ArrayList<Note>) table;
+        frameTable.getContentPane().add(scrollPane);
+        frameTable.setPreferredSize(new Dimension(450, 200));
+        frameTable.pack();
+        frameTable.setLocationRelativeTo(null);
+        frameTable.setVisible(true);
     }
-
-    public void addTable(String namePlayer) { //name
-        for (int i = 0; i < table.size(); i++) {
-            //new Note("d", 3);
-            Note note = table.get(i);
-            if (note.name().equals(namePlayer)) {
-                if (note.score() >= score)
-                    break;
-                table.remove(i);
-                table.add(new Note(namePlayer, score));
-            }
-        }
-
-    }
-
-    public record Note(String name, Integer score) {
-        public String toString() {
-            return name + " " + score;
-        }
-    }*/
-
 }

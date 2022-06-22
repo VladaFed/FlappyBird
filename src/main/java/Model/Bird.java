@@ -1,53 +1,38 @@
 package Model;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
 public class Bird {
-    static private BufferedImage bird;
     public static int x = 300;
-    public static int y = 300;
-    public static double deltCoord = 300;
-    public static double speedBird = 0;
-
     public static final double G = 0.002;
-    public static int startX = 300;
-    public static int startY = 300;
-
-    private static final double WIDTH_BIRD = 70;
-    private static final double HEIGHT_BIRD = 70;
+    public static double deltCoord = 300;
+    public static double speedBird;
+    //public static int x = 300;
     private boolean life = true;
 
+    GameConfiguration gameConfiguration;
 
-    public Bird() {
-        try {
-            bird = ImageIO.read(new File("src/main/java/Pictures/bird7.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public Bird() {}
 
-    public void flyUp() {
+    public double flyUp() {
         speedBird -= 0.48;
         deltCoord -= speedBird;
+        return deltCoord;
     }
 
-    public void flyDown() {
+    public double flyDown() {
+        //System.out.println("flyDown");
         speedBird += G;
         deltCoord += speedBird;
+        return deltCoord;
     }
 
-    public void fall() {
-        speedBird += 0.9;
-        deltCoord += speedBird;
+    public double fall() {
+        //speedBird += 0.9;
+        //deltCoord += speedBird;
+        deltCoord = 300;
+        return deltCoord;
     }
 
-    public int coordX() {
-        return x;
-    }
+    public int coordX() {return x;}
 
     public int coordY() {
         return (int) deltCoord;
@@ -57,15 +42,10 @@ public class Bird {
         return life;
     }
 
-    public void death() {
-        life = false;
+    public boolean death() {
+        return life = false;
     }
 
-
-    static void draw(Graphics g) {
-        y = (int) deltCoord;
-        g.drawImage(bird, x, y, 70, 70, null);
-    }
 
 
 }
