@@ -1,17 +1,17 @@
 package model;
 
+import controller.GameObject;
 import main.GameConfiguration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Game {
     private Bird bird = new Bird();
-    private ArrayList<Pipe> pipes;
-    private TableRecord tableRecord = new TableRecord();
+    private List<Pipe> pipes;
     private int score = 0;
-
-    static GameConfiguration gameConfiguration;
+    private TableRecord tableRecord = new TableRecord();
 
     public Game(GameConfiguration gameConfiguration) {
         pipes = new ArrayList<>();
@@ -28,12 +28,19 @@ public class Game {
         return tableRecord;
     }
 
-    public ArrayList<Pipe> getPipes(){
+    public List<Pipe> getPipes(){
         return pipes;
     }
 
     public void birdFlyDown() {
         bird.flyDown();
+    }
+
+    List<GameObject> gameObjects() {
+        GameObject.BirdModel birdModel = new GameObject.BirdModel(bird.coordX(), bird.coordY());
+        // TODO: pipes
+//        return List.of(birdModel, )
+        return null;
     }
 
     public int getCurrentScore() {

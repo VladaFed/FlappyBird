@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Window extends JFrame  {
 
-    public Window(GameConfiguration configuration, GamePresenter gamePresenter) throws IOException {
+    public Window(GameConfiguration configuration, GamePresenter gamePresenter) {
         NewGame newGame = new NewGame(gamePresenter,  this, configuration);
         getContentPane().add(newGame);
         setSize(configuration.field_width, configuration.field_height);

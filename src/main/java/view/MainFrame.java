@@ -14,7 +14,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton registrationB, aboutB, exitB, recordB, startGameB;
     public JTextField nameT = new JTextField(15);
     public String name;
-    private GameConfiguration gameConfiguration;
+    private final GameConfiguration gameConfiguration;
 
     GamePresenter gamePresenter;
 
@@ -107,6 +107,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void printAbout() {
+        // CR: make the same way as records / registation
         AboutPanel aboutPanel = new AboutPanel();
         //aboutPanel.repaint();
     }

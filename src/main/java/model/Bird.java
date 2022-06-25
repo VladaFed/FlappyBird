@@ -3,12 +3,9 @@ package model;
 public class Bird {
     private int X = 300;
     private double y = 300;
-    private final double G = 0.22;
-    private double deltCoord = 300;
+    private static final double G = 0.22;
     private double speedBird = 0;
-    private boolean life = true;
-
-    public Bird() {}
+    private boolean isAlive = true;
 
     public void flyUp() {
         speedBird -= 4;
@@ -29,11 +26,11 @@ public class Bird {
     }
 
     public boolean exists() {
-        return life;
+        return isAlive;
     }
 
     public boolean death() {
-        return life = false;
+        return isAlive = false;
     }
 
     public void moveX() {

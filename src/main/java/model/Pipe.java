@@ -11,37 +11,26 @@ public class Pipe {
     private static final int min_location_pipe = 200;
     private static final int max_location_pipe = 700;
 
-    private int posY1;
-    private int posY2;
-    public int posX1;
-    private boolean passed = false;
+    private int yBottom;
+    private int yTop;
+    public int x;
 
-    Random rand;
-
-    public Pipe(int l) {
-        posX1 = l;
-        pipeArrangement();
+    public Pipe(int x) {
+        this.x = x;
+        Random rand = new Random();
+        yBottom = rand.nextInt(max_location_pipe - min_location_pipe) + min_location_pipe;
+        yTop = yBottom - DISTANCE_HEIGHT;
     }
 
-    public void pipeArrangement() {
-        rand = new Random();
-        posY1 = rand.nextInt(max_location_pipe - min_location_pipe) + min_location_pipe;
-        posY2 = posY1 - DISTANCE_HEIGHT;
+    public int x() {
+        return x;
     }
 
-    public int XPipe() {
-        return posX1;
+    public int yBottom() {
+        return yBottom;
     }
 
-    public boolean isPassed() {
-        return passed;
-    }
-
-    public int YBottomPipe() {
-        return posY1;
-    }
-
-    public int YTopPipe() {
-        return posY2;
+    public int yTop() {
+        return yTop;
     }
 }

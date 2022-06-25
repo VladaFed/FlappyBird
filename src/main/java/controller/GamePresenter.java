@@ -6,31 +6,38 @@ import main.GameConfiguration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GamePresenter {
-   
-    static GameConfiguration gameConfiguration;
 
     private String gamerName;
 
-    private Window win;
-    private RecordPanel recordPanel = new RecordPanel();
-    ArrayList<PipeView> pipesView = new ArrayList<>();
+    private final RecordPanel recordPanel = new RecordPanel();
+    List<PipeView> pipesView = new ArrayList<>();
 
     private static Game game;
 
     public GamePresenter(GameConfiguration gameConfiguration) throws IOException {
         game = new Game(gameConfiguration);
-        ArrayList<Pipe> pipes = game.getPipes();
+        List<Pipe> pipes = game.getPipes();
 
         for (Pipe p : pipes) {
-            pipesView.add(new PipeView(p.XPipe(), p.YBottomPipe(), p.YTopPipe(), p.isPassed()));
+            pipesView.add(new PipeView(p.x(), p.yBottom(), p.yTop(), false));
         }
 
-        win = new Window(gameConfiguration, this);
+        new Window(gameConfiguration, this);
     }
+
+//    void move() {
+//        List<GameObject> gameObjects = game.move();
+//        if (game.isGameOver()) {
+//            view.gameOver();
+//            return;
+//        }
+//        view.setGameState(gameObjects);
+//    }
 
     private static void handleGameTimer(int period){
         Timer timer = new Timer();
@@ -43,7 +50,11 @@ public class GamePresenter {
         timer.schedule(timerTask, 0, period);
     }
 
+    record Record(String name, int score) {}
+
     public void tableGameController() {
+        // CR: singleton
+//        List<Record> records = TableRecord.getInstance().getRecords();
         game.getRecord().tableGame();
         String[][] data = game.getRecord().NamesRecords();
         String[] column = game.getRecord().columnNames();
@@ -88,7 +99,7 @@ public class GamePresenter {
         game.getBird().moveX();
     }
 
-    public ArrayList<PipeView> getPipes() {
+    public List<PipeView> getPipes() {
             return pipesView;
     }
 

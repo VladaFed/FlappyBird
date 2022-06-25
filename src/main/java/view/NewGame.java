@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameObject;
 import controller.GamePresenter;
 import main.GameConfiguration;
 
@@ -8,10 +9,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class NewGame extends JPanel {
+    // CR: private static final
     private Image back;
     private Image bird;
     private Image pipe1;
@@ -19,7 +22,7 @@ public class NewGame extends JPanel {
 
     java.util.Timer timer;
 
-    public ArrayList<PipeView> pipes;
+    public List<PipeView> pipes;
 
     public String name;
     private Point clickPoint;
@@ -27,6 +30,8 @@ public class NewGame extends JPanel {
     GamePresenter gamePresenter;
     GameConfiguration configuration;
     Window parent;
+
+    List<GameObject> gameState;
 
     private void addEventListeners() {
         this.addMouseListener(new MouseAdapter() {
