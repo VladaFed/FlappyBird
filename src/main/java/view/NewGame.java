@@ -81,7 +81,7 @@ public class NewGame extends JPanel {
                     gameOver();
                 } else if (gamePresenter.BirdCoordX() + configuration.bird_startX  > configuration.pipe_startX + configuration.pipe_num*configuration.distance_width_pipes) {
                     gameOver();
-                } else if (p.XPipe() - (gamePresenter.BirdCoordX() + configuration.bird_startX) < -1 * configuration.bird_width){
+                } else if (p.XPipe() - (gamePresenter.BirdCoordX() + configuration.bird_startX) < configuration.bird_width){
                     p.setPassed();
                 }
             }
