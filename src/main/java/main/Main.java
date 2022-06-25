@@ -1,6 +1,5 @@
 package main;
 
-import view.FieldPanel;
 import view.MainFrame;
 
 import java.io.IOException;
@@ -11,6 +10,6 @@ public class Main {
         gameConfiguration.readFromProperties();
 
         MainFrame frame = new MainFrame(gameConfiguration);
-        FieldPanel fieldPanel = new FieldPanel(gameConfiguration);
+        //FieldPanel fieldPanel = new FieldPanel(gameConfiguration);
     }
 }
