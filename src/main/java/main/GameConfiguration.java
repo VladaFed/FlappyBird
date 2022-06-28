@@ -17,6 +17,8 @@ public class GameConfiguration {
     public int back_y;
     public int back_width;
     public int back_height;
+    public int deltCoords;
+    public int deltMoveX;
 
     public int bird_width;
     public int bird_height;
@@ -63,6 +65,8 @@ public class GameConfiguration {
         bird_startX = propertiesParser.getInteger("bird_startX");
         speedBird = propertiesParser.getDouble("speedBird");
         G = propertiesParser.getDouble("G");
+        deltCoords = propertiesParser.getInteger("deltCoords");
+        deltMoveX = propertiesParser.getInteger("deltMoveX");
 
         pipe_width = propertiesParser.getInteger("pipe_width");
         pipe_height = propertiesParser.getInteger("pipe_height");
