@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class GameConfiguration {
-    //public double G;
     public int field_height;
     public int field_width;
     public int menu_height;
