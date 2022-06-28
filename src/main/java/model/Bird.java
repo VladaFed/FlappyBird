@@ -1,11 +1,17 @@
 package model;
 
 public class Bird {
-    private int X = 300;
-    private double y = 300;
-    private static final double G = 0.22;
-    private double speedBird = 0;
+    private int X;
+    private double G;
+    private double speedBird;
     private boolean isAlive = true;
+    private int y = 300;
+
+    public void settingsBird(int X, double speedBird, double G) {
+        this.X = X;
+        this.speedBird = speedBird;
+        this.G = G;
+    }
 
     public void flyUp() {
         speedBird -= 4;
@@ -22,7 +28,7 @@ public class Bird {
     }
 
     public int coordY() {
-        return (int) y;
+        return y;
     }
 
     public boolean exists() {
