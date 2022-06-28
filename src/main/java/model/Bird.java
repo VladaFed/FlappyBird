@@ -4,17 +4,21 @@ public class Bird {
     private int X;
     private double G;
     private double speedBird;
+    private int deltCoords;
+    private int deltMoveX;
     private boolean isAlive = true;
     private int y = 300;
 
-    public void settingsBird(int X, double speedBird, double G) {
+    public void settingsBird(int X, double speedBird, double G, int deltCoords, int deltMoveX) {
         this.X = X;
         this.speedBird = speedBird;
         this.G = G;
+        this.deltCoords = deltCoords;
+        this.deltMoveX = deltMoveX;
     }
 
     public void flyUp() {
-        speedBird -= 4;
+        speedBird -= deltCoords;
         y -= speedBird;
     }
 
@@ -40,6 +44,6 @@ public class Bird {
     }
 
     public void moveX() {
-        X += 8;
+        X += deltMoveX;
     }
 }
