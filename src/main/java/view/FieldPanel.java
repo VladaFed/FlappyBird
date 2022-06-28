@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NewGame extends JPanel {
+public class FieldPanel extends JPanel {
     private static final Image back = new ImageIcon("src/main/resources/pictures/back7.png").getImage();
     private static final Image bird = new ImageIcon("src/main/resources/pictures/bird7.png").getImage();
     private static final Image pipe1 = new ImageIcon("src/main/resources/pictures/pipe.png").getImage();
@@ -26,7 +26,7 @@ public class NewGame extends JPanel {
 
     GamePresenter gamePresenter;
     GameConfiguration configuration;
-    Window parent;
+    GameFrame parent;
 
     List<GameObject> gameState = new ArrayList<>();
 
@@ -41,10 +41,10 @@ public class NewGame extends JPanel {
         });
     }
 
-    public NewGame(GamePresenter presenter, Window window, GameConfiguration config) {
+    public FieldPanel(GamePresenter presenter, GameFrame gameFrame, GameConfiguration config) {
         gamePresenter = presenter;
         configuration = config;
-        parent = window;
+        parent = gameFrame;
 
         timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -62,10 +62,10 @@ public class NewGame extends JPanel {
     public void drawPipes(Graphics g) {
         for (int i = 1; i < gameState.size(); i++){
             GameObject.PipeModel current = (GameObject.PipeModel) gameState.get(i);
-            if (current.x() - gamePresenter.BirdCoordX() < configuration.field_width){
-                g.drawImage(pipe1, current.x() - gamePresenter.BirdCoordX(),
+            if (current.x() - gamePresenter.birdCoordX() < configuration.field_width){
+                g.drawImage(pipe1, current.x() - gamePresenter.birdCoordX(),
                         current.yBottom(), configuration.pipe_width, configuration.pipe_height, this);
-                g.drawImage(pipe2, current.x() - gamePresenter.BirdCoordX(),
+                g.drawImage(pipe2, current.x() - gamePresenter.birdCoordX(),
                         current.yTop(), configuration.pipe_width, configuration.pipe_height, this);
             }
         }

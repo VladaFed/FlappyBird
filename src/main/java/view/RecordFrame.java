@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class RecordPanel extends JFrame {
+public class RecordFrame extends JFrame {
     private static final String[] columnNames = {"Name", "Score"};
     JFrame frameTable = new JFrame("Table of record");
 

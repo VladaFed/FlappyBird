@@ -7,12 +7,12 @@ import main.GameConfiguration;
 import javax.swing.*;
 import java.util.List;
 
-public class Window extends JFrame  {
-    NewGame newGame;
+public class GameFrame extends JFrame  {
+    FieldPanel fieldPanel;
 
-    public Window(GameConfiguration configuration, GamePresenter gamePresenter) {
-        newGame = new NewGame(gamePresenter,  this, configuration);
-        getContentPane().add(newGame);
+    public GameFrame(GameConfiguration configuration, GamePresenter gamePresenter) {
+        fieldPanel = new FieldPanel(gamePresenter,  this, configuration);
+        getContentPane().add(fieldPanel);
         setSize(configuration.field_width, configuration.field_height);
         setTitle("GamePanel");
         setLocationRelativeTo(null);
@@ -20,10 +20,10 @@ public class Window extends JFrame  {
     }
 
     public void gameOver() {
-        newGame.gameOver();
+        fieldPanel.gameOver();
     }
 
     public void setGameState(List<GameObject> gameObjects) {
-        newGame.setGameState(gameObjects);
+        fieldPanel.setGameState(gameObjects);
     }
 }

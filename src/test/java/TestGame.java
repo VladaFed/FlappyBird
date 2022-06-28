@@ -1,7 +1,6 @@
 import main.GameConfiguration;
-import model.GameModel;
+import model.Field;
 import org.junit.Test;
-import view.NewGame;
 
 import java.io.IOException;
 
@@ -25,7 +24,7 @@ public class TestGame {
         GameConfiguration gameConfiguration = new GameConfiguration("config.properties");
         gameConfiguration.readFromProperties();
 
-        GameModel model = new GameModel(gameConfiguration);
+        Field model = new Field(gameConfiguration);
 
         model.setGameOver();
 

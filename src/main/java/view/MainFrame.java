@@ -1,14 +1,18 @@
 package view;
 
 import controller.GamePresenter;
+import jdk.jfr.consumer.RecordedFrame;
 import main.GameConfiguration;
 import main.GameConfigurationMenu;
+import model.Record;
+import model.TableRecord;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 
 public class MainFrame extends JFrame implements ActionListener {
     private JLabel titleL, nameL, markL, warningL;

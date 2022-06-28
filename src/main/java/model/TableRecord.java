@@ -23,7 +23,7 @@ public class TableRecord {
         return INSTANCE;
     }
 
-    public TableRecord() {
+    private TableRecord() {
         file = new File("src/main/resources/HighScores");
         try {
             file.createNewFile();
