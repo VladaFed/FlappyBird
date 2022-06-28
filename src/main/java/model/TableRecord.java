@@ -9,94 +9,75 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class TableRecord {
 
-    private static final List<Note> table = new ArrayList<>();
+    private static TableRecord INSTANCE;
+    private final File file;
 
-    public String[] columnNames;
-    public String[][] array;
-
-    public TableRecord() {
-        tableGame();
+    public static TableRecord getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new TableRecord();
+        }
+        return INSTANCE;
     }
 
-    public static void addTable(String namePlayer, int score) {
-        boolean nameExists = false;
-        for (int i = 0; i < table.size(); i++) {
-            Note note = table.get(i);
-            if (note.name().equals(namePlayer)) {
-                nameExists = true;
-                if (note.score() >= score)
-                    break;
-                table.remove(i);
-                table.add(new Note(namePlayer, score));
-                break;
-            }
+    public TableRecord() {
+        file = new File("src/main/resources/HighScores");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to record the result of the game");
         }
-        if (!nameExists)
-            table.add(new Note(namePlayer, score));
+    }
 
+    public List<Record> getRecords() {
+        List<Record> records = new ArrayList<>();
+        try {
+            Scanner scanRecords = new Scanner(file);
+            while (scanRecords.hasNextLine()) {
+                Scanner scanLine = new Scanner(scanRecords.nextLine());
+                String name = scanLine.hasNext() ? scanLine.next() : "Undefined player";
+                int score = scanLine.hasNext() ? parseInt(scanLine.next()) : -1;
+                records.add(new Record(name, score));
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No");
+        }
+        return records;
+    }
 
-        try{
-            FileWriter writer = new FileWriter("src/main/java/HighScores");
-            for (Note line : table) {
+    private void setRecords(List<Record> records) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            for (Record line : records) {
                 writer.write(line.name() + " " + line.score() + System.getProperty("line.separator"));
             }
             writer.close();
-        } catch (IOException ex){ex.printStackTrace();}
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
-    public void tableGame() {
-        columnNames = new String[]{
-                "Name",
-                "Score"
-        };
-
-        String filepath = "src/main/java/HighScores";
-        Scanner scannMatrix = null;
-        ArrayList<ArrayList> Matrix = new ArrayList<ArrayList>();
-        try{
-            scannMatrix = new Scanner(new File(filepath));
-        }catch(FileNotFoundException e){
-            JOptionPane.showMessageDialog(null, "Noo");
-        }
-
-        while(scannMatrix.hasNextLine()){
-            Scanner scanLine = new Scanner(scannMatrix.nextLine());
-            ArrayList<String> line = new ArrayList<String>();
-            while(scanLine.hasNext()){
-                line.add(new String(scanLine.next()));
-            }
-            Matrix.add(line);
-        }
-
-        int arrWidth = Matrix.size();
-        int arrLength = Matrix.get(0).size();
-        array = new String[arrWidth][arrLength];
-        for(int y = 0; y < Matrix.size(); y++){
-            for(int x = 0; x < Matrix.get(y).size(); x++){
-                array[y][x] = (String)Matrix.get(y).get(x);
+    public void addRecord(String namePlayer, int score) {
+        //System.out.println(score);
+        List<Record> records = getRecords();
+        boolean nameExists = false;
+        for (int i = 0; i < records.size(); i++) {
+            Record record = records.get(i);
+            if (record.name().equals(namePlayer)) {
+                nameExists = true;
+                if (record.score() >= score)
+                    break;
+                records.remove(i);
+                records.add(new Record(namePlayer, score));
+                break;
             }
         }
-    }
-
-    public String[] columnNames() {
-        return columnNames;
-    }
-
-    public String[][] NamesRecords() {
-        return array;
-    }
-
-    public record Note(String name, Integer score) {
-        public String name() {
-            return name;
+        if (!nameExists) {
+            records.add(new Record(namePlayer, score));
         }
-        public Integer score() {
-            return score;
-        }
-        public String toString() {
-            return name + " " + score;
-        }
+        setRecords(records);
     }
 }
