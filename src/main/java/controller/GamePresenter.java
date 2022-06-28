@@ -1,115 +1,81 @@
 package controller;
 
 import model.*;
+import model.Record;
 import view.*;
 import main.GameConfiguration;
+import view.Window;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GamePresenter {
 
     private String gamerName;
-
     private final RecordPanel recordPanel = new RecordPanel();
-    List<PipeView> pipesView = new ArrayList<>();
+    Window view;
+    GameConfiguration config;
 
-    private static Game game;
+    private static GameModel gameModel;
 
     public GamePresenter(GameConfiguration gameConfiguration) throws IOException {
-        game = new Game(gameConfiguration);
-        List<Pipe> pipes = game.getPipes();
-
-        for (Pipe p : pipes) {
-            pipesView.add(new PipeView(p.x(), p.yBottom(), p.yTop(), false));
-        }
-
-        new Window(gameConfiguration, this);
+        this.config = gameConfiguration;
+        gameModel = new GameModel(gameConfiguration);
+        view = new Window(gameConfiguration, this);
     }
 
-//    void move() {
-//        List<GameObject> gameObjects = game.move();
-//        if (game.isGameOver()) {
-//            view.gameOver();
-//            return;
-//        }
-//        view.setGameState(gameObjects);
-//    }
-
-    private static void handleGameTimer(int period){
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                usualBirdAction();
+    private void move() {
+        List<GameObject> gameObjects = gameModel.move();
+        if (view != null){
+            if (gameModel.isGameOver()) {
+                view.gameOver();
+                return;
             }
-        };
-        timer.schedule(timerTask, 0, period);
+            view.setGameState(gameObjects);
+        }
     }
 
-    record Record(String name, int score) {}
+    public void update(){
+        usualBirdAction();
+        move();
+    }
 
     public void tableGameController() {
-        // CR: singleton
-//        List<Record> records = TableRecord.getInstance().getRecords();
-        game.getRecord().tableGame();
-        String[][] data = game.getRecord().NamesRecords();
-        String[] column = game.getRecord().columnNames();
-        recordPanel.tableGame(data, column);
+        List<Record> records = TableRecord.getInstance().getRecords();
+        String[][] data = records.stream().map(record -> new String[] {record.name(),
+                String.valueOf(record.score())}).toArray(String[][]::new);
+        recordPanel.tableGame(data, config.record_panel_width, config.record_panel_height);
     }
 
     public void addName(String name, int score) {
-        TableRecord.addTable(name, score);
+        TableRecord.getInstance().addRecord(name, score);;
     }
 
     public void newGame(String name) throws IOException {
-        System.out.println(name);
         gamerName = name;
-        handleGameTimer(100);
     }
 
     public int BirdCoordX() {
-        return game.getBird().coordX();
+        return gameModel.getBird().coordX();
     }
 
-    public int BirdCoordY() {
-        return game.getBird().coordY();
-    }
-
-    public boolean birdDeath() {
-        addName(gamerName, game.getCurrentScore());
+    public void gameOver() {
+        addName(gamerName, gameModel.getCurrentScore());
         recordPanel.getContentPane();
-        return game.getBird().death();
     }
 
     public void updateClick() {
-        if (game.getBird().exists()) {
-            game.getBird().flyUp();
+        if (gameModel.birdExists()) {
+            gameModel.birdFlyUp();
+            move();
+        } else {
+            gameModel.getBird().death();
+            gameOver();
         }
     }
 
     public static void usualBirdAction() {
-       game.birdFlyDown();
-    }
-
-    public void birdMoveX() {
-        game.getBird().moveX();
-    }
-
-    public List<PipeView> getPipes() {
-            return pipesView;
-    }
-
-    public void updateScore() {
-        int score = 0;
-        for (PipeView p : pipesView) {
-            if (p.IsPassed()){
-                ++score;
-            }
-        }
-        game.updateScore(score);
+       gameModel.birdFlyDown();
+       gameModel.birdFlyRight();
     }
 }
