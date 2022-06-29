@@ -1,7 +1,9 @@
 package controller;
 
+import main.GameConfigurationMenu;
+import main.TableRecord;
 import model.*;
-import model.Record;
+import main.Record;
 import view.*;
 import main.GameConfiguration;
 import view.GameFrame;
@@ -13,24 +15,28 @@ public class GamePresenter {
 
     private String gamerName;
     private final RecordFrame recordFrame = new RecordFrame();
-    private final GameFrame view;
+    GameFrame view;
     GameConfiguration config;
+    GameConfigurationMenu configMenu;
 
     private static Field field;
 
-    public GamePresenter(GameConfiguration gameConfiguration) throws IOException {
+    public GamePresenter(GameConfiguration gameConfiguration, GameConfigurationMenu gameConfigurationMenu) throws IOException {
         this.config = gameConfiguration;
-        field = new Field(gameConfiguration);
-        view = new GameFrame(gameConfiguration, this);
+        this.configMenu = gameConfigurationMenu;
+        field = new Field(gameConfiguration, gameConfigurationMenu);
+        view = new GameFrame(gameConfiguration, gameConfigurationMenu, this);
     }
 
     private void move() {
         List<GameObject> gameObjects = field.move();
-        if (field.isGameOver()) {
-            view.gameOver();
-            return;
+        if (view != null){
+            if (field.isGameOver()) {
+                view.gameOver();
+                return;
+            }
+            view.setGameState(gameObjects);
         }
-        view.setGameState(gameObjects);
     }
 
     public void update(){
@@ -42,11 +48,11 @@ public class GamePresenter {
         List<Record> records = TableRecord.getInstance().getRecords();
         String[][] data = records.stream().map(record -> new String[] {record.name(),
                 String.valueOf(record.score())}).toArray(String[][]::new);
-        recordFrame.tableGame(data, config.record_panel_width, config.record_panel_height);
+        recordFrame.tableGame(data, configMenu.recordPanelWidth, configMenu.recordPanelHeight);
     }
 
     public void addName(String name, int score) {
-        TableRecord.getInstance().addRecord(name, score);
+        TableRecord.getInstance().addRecord(name, score);;
     }
 
     public void newGame(String name) throws IOException {
@@ -54,7 +60,7 @@ public class GamePresenter {
     }
 
     public int birdCoordX() {
-        return field.getBird().coordX();
+        return field.getBird().birdXCoordinate();
     }
 
     public void gameOver() {
@@ -63,13 +69,8 @@ public class GamePresenter {
     }
 
     public void updateClick() {
-        if (field.birdExists()) {
-            field.birdFlyUp();
-            move();
-        } else {
-            field.getBird().death();
-            gameOver();
-        }
+        field.birdFlyUp();
+        move();
     }
 
     public static void usualBirdAction() {
