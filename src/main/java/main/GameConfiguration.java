@@ -38,7 +38,9 @@ public class GameConfiguration {
         this.filename = filename;
     }
 
-    public void readFromProperties() throws IOException {
+    public static GameConfiguration readFromProperties(String filename) throws IOException {
+        new GameConfiguration()
+
         propertiesParser = new PropertiesParser(filename);
 
         backX = propertiesParser.getInteger("backX");

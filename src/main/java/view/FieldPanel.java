@@ -58,7 +58,7 @@ public class FieldPanel extends JPanel {
             @Override
             public void run() {
                 gamePresenter.update();
-                repaint();
+//                repaint();
             }
         };
         timer.schedule(timerTask, 0, 20);
@@ -81,8 +81,8 @@ public class FieldPanel extends JPanel {
 
     public void gameOver(){
         mouseListenerIsActive = false;
-        gamePresenter.gameOver();
-        timer.cancel();
+//        gamePresenter.gameOver();
+//        timer.cancel();
         parent.dispose();
     }
 

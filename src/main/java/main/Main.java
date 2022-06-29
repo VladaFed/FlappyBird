@@ -7,8 +7,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         GameConfiguration gameConfiguration = new GameConfiguration("config.properties");
-        GameConfigurationMenu gameConfigurationMenu = new GameConfigurationMenu("menu.properties");
-        gameConfiguration.readFromProperties();
+//        GameConfigurationMenu gameConfigurationMenu = new GameConfigurationMenu("menu.properties");
+        GameConfiguration.readFromProperties("menu.properties");
         gameConfigurationMenu.readFromProperties();
 
 

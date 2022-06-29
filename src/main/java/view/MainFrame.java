@@ -3,12 +3,15 @@ package view;
 import controller.GamePresenter;
 import main.GameConfiguration;
 import main.GameConfigurationMenu;
+import main.Record;
+import main.TableRecord;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 
 public class MainFrame extends JFrame implements ActionListener {
     private JLabel nameGameLabel, nameLabel, markLabel, warningLabel;
@@ -146,9 +149,11 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void tableGame() {
-        if (gamePresenter != null){
-            gamePresenter.tableGameController();
-        }
+        String[][] records = TableRecord.getInstance().getRecords();
+        new RecordFrame(records, ???);
+//        if (gamePresenter != null){
+//            gamePresenter.tableGameController();
+//        }
     }
 
     @Override

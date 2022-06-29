@@ -5,7 +5,6 @@ import java.util.Random;
 public class Pipe {
     private static int heightPipe;
     private static int distance;
-    private int distanceHeight = heightPipe + distance;
     private static int minLocationPipe;
     private static int maxLocationPipe;
 
@@ -15,10 +14,10 @@ public class Pipe {
     private boolean passed = false;
 
     public Pipe(int heightPipe, int distance, int minLocationPipe, int maxLocationPipe) {
-        this.heightPipe = heightPipe;
-        this.distance = distance;
-        this.minLocationPipe = minLocationPipe;
-        this.maxLocationPipe = maxLocationPipe;
+        Pipe.heightPipe = heightPipe;
+        Pipe.distance = distance;
+        Pipe.minLocationPipe = minLocationPipe;
+        Pipe.maxLocationPipe = maxLocationPipe;
     }
 
     public Pipe(int x) {
@@ -26,6 +25,7 @@ public class Pipe {
         Random rand = new Random();
         if (maxLocationPipe > minLocationPipe) {
             yBottom = rand.nextInt(maxLocationPipe - minLocationPipe) + minLocationPipe;
+            int distanceHeight = heightPipe + distance;
             yTop = yBottom - distanceHeight;
         }
     }
@@ -42,7 +42,7 @@ public class Pipe {
         return yTop;
     }
 
-    public boolean IsPassed(){
+    public boolean isPassed(){
         return passed;
     }
 

@@ -33,7 +33,7 @@ public class TableRecord {
         }
     }
 
-    public List<Record> getRecords() {
+    public String[][] getRecords() {
         List<Record> records = new ArrayList<>();
         try {
             Scanner scanRecords = new Scanner(file);
