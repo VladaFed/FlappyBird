@@ -6,71 +6,74 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class GameConfigurationMenu {
-    public int menu_height;
-    public int menu_width;
+    public int menuHeight;
+    public int menuWidth;
 
-    public int field_height;
-    public int field_width;
+    public int fieldHeight;
+    public int fieldWidth;
 
-    public int panel_start_width;
-    public int panel_start_height;
+    public int recordPanelWidth;
+    public int recordPanelHeight;
 
-    public int about_panel_height;
-    public int about_panel_width;
+    public int panelStartWidth;
+    public int panelStartHeight;
 
-    public int flappy_bird_size;
-    public int flappy_bird_x;
-    public int flappy_bird_y;
-    public int flappy_bird_width;
-    public int flappy_bird_height;
+    public int aboutPanelHeight;
+    public int aboutPanelWidth;
 
-    public int warning_bird_size;
-    public int warning_x;
-    public int warning_y;
-    public int warning_width;
-    public int warning_height;
+    public int flappyBirdSize;
+    public int flappyBirdX;
+    public int flappyBirdY;
+    public int flappyBirdWidth;
+    public int flappyBirdHeight;
 
-    public int registration_x;
-    public int registration_y;
-    public int registration_width;
-    public int registration_height;
+    public int warningBirdSize;
+    public int warningX;
+    public int warningY;
+    public int warningWidth;
+    public int warningHeight;
 
-    public int about_x;
-    public int about_y;
-    public int about_width;
-    public int about_height;
+    public int registrationX;
+    public int registrationY;
+    public int registrationWidth;
+    public int registrationHeight;
 
-    public int record_x;
-    public int record_y;
-    public int record_width;
-    public int record_height;
+    public int aboutX;
+    public int aboutY;
+    public int aboutWidth;
+    public int aboutHeight;
 
-    public int exit_x;
-    public int exit_y;
-    public int exit_width;
-    public int exit_height;
+    public int recordX;
+    public int recordY;
+    public int recordWidth;
+    public int recordHeight;
 
-    public int registration_size;
-    public int registration_label_x;
-    public int registration_label_y;
-    public int registration_label_width;
-    public int registration_label_height;
+    public int exitX;
+    public int exitY;
+    public int exitWidth;
+    public int exitHeight;
 
-    public int enter_name_size;
-    public int enter_name_x;
-    public int enter_name_y;
-    public int enter_name_width;
-    public int enter_name_height;
+    public int registrationSize;
+    public int registrationLabelX;
+    public int registrationLabelY;
+    public int registrationLabelWidth;
+    public int registrationLabelHeight;
 
-    public int start_x;
-    public int start_y;
-    public int start_width;
-    public int start_height;
+    public int enterNameSize;
+    public int enterNameX;
+    public int enterNameY;
+    public int enterNameWidth;
+    public int enterNameHeight;
 
-    public int name_x;
-    public int name_y;
-    public int name_width;
-    public int name_height;
+    public int startX;
+    public int startY;
+    public int startWidth;
+    public int startHeight;
+
+    public int nameX;
+    public int nameY;
+    public int nameWidth;
+    public int nameHeight;
 
     private Properties properties;
     private PropertiesParser propertiesParser;
@@ -82,71 +85,73 @@ public class GameConfigurationMenu {
 
     public void readFromProperties() throws IOException {
         propertiesParser = new PropertiesParser(filename);
-        menu_height = propertiesParser.getInteger("menu_height");
-        menu_width = propertiesParser.getInteger("menu_width");
+        menuHeight = propertiesParser.getInteger("menuHeight");
+        menuWidth = propertiesParser.getInteger("menuWidth");
 
-        field_height = propertiesParser.getInteger("field_height");
-        field_width = propertiesParser.getInteger("field_width");
+        fieldHeight = propertiesParser.getInteger("fieldHeight");
+        fieldWidth = propertiesParser.getInteger("fieldWidth");
 
-        panel_start_width = propertiesParser.getInteger("panel_start_width");
-        panel_start_height = propertiesParser.getInteger("panel_start_height");
+        recordPanelWidth = propertiesParser.getInteger("recordPanelWidth");
+        recordPanelHeight = propertiesParser.getInteger("recordPanelHeight");
 
-        about_panel_height = propertiesParser.getInteger("about_panel_height");
-        about_panel_width = propertiesParser.getInteger("about_panel_width");
+        panelStartWidth = propertiesParser.getInteger("panelStartWidth");
+        panelStartHeight = propertiesParser.getInteger("panelStartHeight");
 
-        flappy_bird_size = propertiesParser.getInteger("flappy_bird_size");
-        flappy_bird_x = propertiesParser.getInteger("flappy_bird_x");
-        flappy_bird_y = propertiesParser.getInteger("flappy_bird_y");
-        flappy_bird_width = propertiesParser.getInteger("flappy_bird_width");
-        flappy_bird_height = propertiesParser.getInteger("flappy_bird_height");
+        aboutPanelHeight = propertiesParser.getInteger("aboutPanelHeight");
+        aboutPanelWidth = propertiesParser.getInteger("aboutPanelWidth");
 
-        warning_bird_size = propertiesParser.getInteger("warning_bird_size");
-        warning_x = propertiesParser.getInteger("warning_x");
-        warning_y = propertiesParser.getInteger("warning_y");
-        warning_width = propertiesParser.getInteger("warning_width");
-        warning_height = propertiesParser.getInteger("warning_height");
+        flappyBirdSize = propertiesParser.getInteger("flappyBirdSize");
+        flappyBirdX = propertiesParser.getInteger("flappyBirdX");
+        flappyBirdY = propertiesParser.getInteger("flappyBirdY");
+        flappyBirdWidth = propertiesParser.getInteger("flappyBirdWidth");
+        flappyBirdHeight = propertiesParser.getInteger("flappyBirdHeight");
 
-        registration_x = propertiesParser.getInteger("registration_x");
-        registration_y = propertiesParser.getInteger("registration_y");
-        registration_width = propertiesParser.getInteger("registration_width");
-        registration_height = propertiesParser.getInteger("registration_height");
+        warningBirdSize = propertiesParser.getInteger("warningBirdSize");
+        warningX = propertiesParser.getInteger("warningX");
+        warningY = propertiesParser.getInteger("warningY");
+        warningWidth = propertiesParser.getInteger("warningWidth");
+        warningHeight = propertiesParser.getInteger("warningHeight");
 
-        about_x = propertiesParser.getInteger("about_x");
-        about_y = propertiesParser.getInteger("about_y");
-        about_width = propertiesParser.getInteger("about_width");
-        about_height = propertiesParser.getInteger("about_height");
+        registrationX = propertiesParser.getInteger("registrationX");
+        registrationY = propertiesParser.getInteger("registrationY");
+        registrationWidth = propertiesParser.getInteger("registrationWidth");
+        registrationHeight = propertiesParser.getInteger("registrationHeight");
 
-        record_x = propertiesParser.getInteger("record_x");
-        record_y = propertiesParser.getInteger("record_y");
-        record_width = propertiesParser.getInteger("record_width");
-        record_height = propertiesParser.getInteger("record_height");
+        aboutX = propertiesParser.getInteger("aboutX");
+        aboutY = propertiesParser.getInteger("aboutY");
+        aboutWidth = propertiesParser.getInteger("aboutWidth");
+        aboutHeight = propertiesParser.getInteger("aboutHeight");
 
-        exit_x = propertiesParser.getInteger("exit_x");
-        exit_y = propertiesParser.getInteger("exit_y");
-        exit_width = propertiesParser.getInteger("exit_width");
-        exit_height = propertiesParser.getInteger("exit_height");
-        registration_label_x = propertiesParser.getInteger("registration_label_x");
+        recordX = propertiesParser.getInteger("recordX");
+        recordY = propertiesParser.getInteger("recordY");
+        recordWidth = propertiesParser.getInteger("recordWidth");
+        recordHeight = propertiesParser.getInteger("recordHeight");
 
-        registration_size = propertiesParser.getInteger("registration_size");
-        registration_label_x = propertiesParser.getInteger("registration_label_x");
-        registration_label_y = propertiesParser.getInteger("registration_label_y");
-        registration_label_width = propertiesParser.getInteger("registration_label_width");
-        registration_label_height = propertiesParser.getInteger("registration_label_height");
+        exitX = propertiesParser.getInteger("exitX");
+        exitY = propertiesParser.getInteger("exitY");
+        exitWidth = propertiesParser.getInteger("exitWidth");
+        exitHeight = propertiesParser.getInteger("exitHeight");
 
-        enter_name_size = propertiesParser.getInteger("enter_name_size");
-        enter_name_x = propertiesParser.getInteger("enter_name_x");
-        enter_name_y = propertiesParser.getInteger("enter_name_y");
-        enter_name_width = propertiesParser.getInteger("enter_name_width");
-        enter_name_height = propertiesParser.getInteger("enter_name_height");
+        registrationSize = propertiesParser.getInteger("registration_size");
+        registrationLabelX = propertiesParser.getInteger("registration_label_x");
+        registrationLabelY = propertiesParser.getInteger("registration_label_y");
+        registrationLabelWidth = propertiesParser.getInteger("registration_label_width");
+        registrationLabelHeight = propertiesParser.getInteger("registration_label_height");
 
-        start_x = propertiesParser.getInteger("start_x");
-        start_y = propertiesParser.getInteger("start_y");
-        start_width = propertiesParser.getInteger("start_width");
-        start_height = propertiesParser.getInteger("start_height");
+        enterNameSize = propertiesParser.getInteger("enterNameSize");
+        enterNameX = propertiesParser.getInteger("enterNameX");
+        enterNameY = propertiesParser.getInteger("enterNameY");
+        enterNameWidth = propertiesParser.getInteger("enterNameWidth");
+        enterNameHeight = propertiesParser.getInteger("enterNameHeight");
 
-        name_x = propertiesParser.getInteger("name_x");
-        name_y = propertiesParser.getInteger("name_y");
-        name_width = propertiesParser.getInteger("name_width");
-        name_height = propertiesParser.getInteger("name_height");
+        startX = propertiesParser.getInteger("startX");
+        startY = propertiesParser.getInteger("startY");
+        startWidth = propertiesParser.getInteger("startWidth");
+        startHeight = propertiesParser.getInteger("startHeight");
+
+        nameX = propertiesParser.getInteger("nameX");
+        nameY = propertiesParser.getInteger("nameY");
+        nameWidth = propertiesParser.getInteger("nameWidth");
+        nameHeight = propertiesParser.getInteger("nameHeight");
     }
 }
