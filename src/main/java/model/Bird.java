@@ -4,46 +4,38 @@ public class Bird {
     private int X;
     private double G;
     private double speedBird;
-    private int deltCoords;
-    private int deltMoveX;
-    private boolean isAlive = true;
-    private int y = 300;
+    private int deltaCoordinateY;
+    private int deltaMoveX;
+    private int Y;
 
-    public void settingsBird(int X, double speedBird, double G, int deltCoords, int deltMoveX) {
+    public void settingsBird(int Y, int X, double speedBird, double G, int deltaCoordinateY, int deltaMoveX) {
+        this.Y = Y;
         this.X = X;
         this.speedBird = speedBird;
         this.G = G;
-        this.deltCoords = deltCoords;
-        this.deltMoveX = deltMoveX;
+        this.deltaCoordinateY = deltaCoordinateY;
+        this.deltaMoveX = deltaMoveX;
     }
 
     public void flyUp() {
-        speedBird -= deltCoords;
-        y -= speedBird;
+        speedBird -= deltaCoordinateY;
+        Y -= speedBird;
     }
 
     public void flyDown() {
         speedBird += G;
-        y += speedBird;
+        Y += speedBird;
     }
 
-    public int coordX() {
+    public int birdXCoordinate() {
         return X;
     }
 
-    public int coordY() {
-        return y;
-    }
-
-    public boolean exists() {
-        return isAlive;
-    }
-
-    public boolean death() {
-        return isAlive = false;
+    public int birdYCoordinate() {
+        return Y;
     }
 
     public void moveX() {
-        X += deltMoveX;
+        X += deltaMoveX;
     }
 }
