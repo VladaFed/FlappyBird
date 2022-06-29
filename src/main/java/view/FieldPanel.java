@@ -3,6 +3,7 @@ package view;
 import controller.GameObject;
 import controller.GamePresenter;
 import main.GameConfiguration;
+import main.GameConfigurationMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,24 +27,30 @@ public class FieldPanel extends JPanel {
 
     GamePresenter gamePresenter;
     GameConfiguration configuration;
+    GameConfigurationMenu configurationMenu;
     GameFrame parent;
+    private boolean mouseListenerIsActive;
 
     List<GameObject> gameState = new ArrayList<>();
 
     private void addEventListeners() {
+        mouseListenerIsActive = true;
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                clickPoint = e.getPoint();
-                gamePresenter.updateClick();
-                repaint();
+                if (mouseListenerIsActive) {
+                    clickPoint = e.getPoint();
+                    gamePresenter.updateClick();
+                    repaint();
+                }
             }
         });
     }
 
-    public FieldPanel(GamePresenter presenter, GameFrame gameFrame, GameConfiguration config) {
+    public FieldPanel(GamePresenter presenter, GameFrame gameFrame, GameConfiguration config, GameConfigurationMenu configMenu) {
         gamePresenter = presenter;
         configuration = config;
+        configurationMenu = configMenu;
         parent = gameFrame;
 
         timer = new Timer();
@@ -62,34 +69,35 @@ public class FieldPanel extends JPanel {
     public void drawPipes(Graphics g) {
         for (int i = 1; i < gameState.size(); i++){
             GameObject.PipeModel current = (GameObject.PipeModel) gameState.get(i);
-            if (current.x() - gamePresenter.birdCoordX() < configuration.field_width){
+            if (current.x() - gamePresenter.birdCoordX() < configurationMenu.fieldWidth){
                 g.drawImage(pipe1, current.x() - gamePresenter.birdCoordX(),
-                        current.yBottom(), configuration.pipe_width, configuration.pipe_height, this);
+                        current.yBottom(), configuration.pipeWidth, configuration.pipeHeight, this);
                 g.drawImage(pipe2, current.x() - gamePresenter.birdCoordX(),
-                        current.yTop(), configuration.pipe_width, configuration.pipe_height, this);
+                        current.yTop(), configuration.pipeWidth, configuration.pipeHeight, this);
             }
         }
     }
 
 
     public void gameOver(){
+        mouseListenerIsActive = false;
         gamePresenter.gameOver();
         timer.cancel();
         parent.dispose();
     }
 
     public void drawBird(Graphics g) {
-        int x = configuration.bird_startX;
+        int x = configuration.birdStartX;
         if (gameState.size() > 0) {
-            GameObject.BirdModel birdObject = (GameObject.BirdModel) gameState.get(0);
-            g.drawImage(bird, x, birdObject.y(), configuration.bird_width, configuration.bird_height, this);
+            GameObject.BirdModel birdObject = (GameObject.BirdModel)gameState.get(0);
+            g.drawImage(bird, x, birdObject.y(), configuration.birdWidth, configuration.birdHeight, this);
         }
     }
 
     @Override
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        g.drawImage(back, configuration.back_x, configuration.back_y, configuration.back_width, configuration.back_height, this);
+        g.drawImage(back, configuration.backX, configuration.backY, configuration.backWidth, configuration.backHeight, this);
         drawBird(g);
         drawPipes(g);
     }
