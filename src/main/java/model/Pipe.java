@@ -6,26 +6,26 @@ public class Pipe {
     private static int heightPipe;
     private static int distance;
     private int distanceHeight = heightPipe + distance;
-    private static int min_location_pipe;
-    private static int max_location_pipe;
+    private static int minLocationPipe;
+    private static int maxLocationPipe;
 
     private int yBottom;
     private int yTop;
     public int x;
     private boolean passed = false;
 
-    public Pipe(int heightPipe, int distance, int min_location_pipe, int max_location_pipe) {
+    public Pipe(int heightPipe, int distance, int minLocationPipe, int maxLocationPipe) {
         this.heightPipe = heightPipe;
         this.distance = distance;
-        this.min_location_pipe = min_location_pipe;
-        this.max_location_pipe = max_location_pipe;
+        this.minLocationPipe = minLocationPipe;
+        this.maxLocationPipe = maxLocationPipe;
     }
 
     public Pipe(int x) {
         this.x = x;
         Random rand = new Random();
-        if (max_location_pipe > min_location_pipe) {
-            yBottom = rand.nextInt(max_location_pipe - min_location_pipe) + min_location_pipe;
+        if (maxLocationPipe > minLocationPipe) {
+            yBottom = rand.nextInt(maxLocationPipe - minLocationPipe) + minLocationPipe;
             yTop = yBottom - distanceHeight;
         }
     }
